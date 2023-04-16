@@ -1,6 +1,8 @@
 import React from "react";
 import { Droppable } from "react-beautiful-dnd";
-import Tickets from "./Ticket";
+import Tickets from "../Ticket/Ticket";
+
+import css from "./Stack.module.css";
 
 interface StackProps {
 	droppableId: string;
@@ -12,9 +14,9 @@ const Stack = ({ droppableId, items }: StackProps) => {
 		<Droppable droppableId={droppableId}>
 			{(provided) => (
 				<div
+					className={css.stack}
 					ref={provided.innerRef}
 					{...provided.droppableProps}
-					style={{ marginLeft: "5%" }}
 				>
 					{items.map((item, index) => (
 						<Tickets

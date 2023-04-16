@@ -1,12 +1,13 @@
-import { Container, Flex } from "@mantine/core";
-import Stack from "./Stack";
+import Stack from "../Stack/Stack";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useState, useEffect } from "react";
+import css from "./Backlog.module.css";
 
 const Backlog = () => {
 	const [items, setItems] = useState<{ id: string; content: string }[]>([]);
 	const [items2, setItems2] = useState<{ id: string; content: string }[]>([]);
 	const [items3, setItems3] = useState<{ id: string; content: string }[]>([]);
+	const [items4, setItems4] = useState<{ id: string; content: string }[]>([]);
 
 	useEffect(() => {
 		const items = [];
@@ -33,6 +34,14 @@ const Backlog = () => {
 			});
 		}
 		setItems3(items3);
+		const items4 = [];
+		for (let i = 0; i < 10; i++) {
+			items4.push({
+				id: `item-${i + 30}`,
+				content: `item ${i + 30}`,
+			});
+		}
+		setItems4(items4);
 	}, []);
 
 	const getSourceList = (droppableId: string) => {
@@ -43,6 +52,8 @@ const Backlog = () => {
 				return items2;
 			case "list3":
 				return items3;
+			case "list4":
+				return items4;
 			default:
 				return items;
 		}
@@ -56,6 +67,8 @@ const Backlog = () => {
 				return items2;
 			case "list3":
 				return items3;
+			case "list4":
+				return items4;
 			default:
 				return items;
 		}
@@ -77,6 +90,9 @@ const Backlog = () => {
 			case "list3":
 				setItems3(destinationList);
 				break;
+			case "list4":
+				setItems4(destinationList);
+				break;
 			default:
 				setItems(destinationList);
 				break;
@@ -91,6 +107,9 @@ const Backlog = () => {
 				break;
 			case "list3":
 				setItems3(sourceList);
+				break;
+			case "list4":
+				setItems4(sourceList);
 				break;
 			default:
 				setItems(sourceList);
@@ -123,24 +142,26 @@ const Backlog = () => {
 		);
 	};
 	return (
-		<Container>
-			<Flex justify="center">
-				<DragDropContext onDragEnd={onDragEnd}>
-					<Stack
-						droppableId={"list"}
-						items={items}
-					/>
-					<Stack
-						droppableId={"list2"}
-						items={items2}
-					/>
-					<Stack
-						droppableId={"list3"}
-						items={items3}
-					/>
-				</DragDropContext>
-			</Flex>
-		</Container>
+		<div className={css.container}>
+			<DragDropContext onDragEnd={onDragEnd}>
+				<Stack
+					droppableId={"list"}
+					items={items}
+				/>
+				<Stack
+					droppableId={"list2"}
+					items={items2}
+				/>
+				<Stack
+					droppableId={"list3"}
+					items={items3}
+				/>
+				<Stack
+					droppableId={"list4"}
+					items={items4}
+				/>
+			</DragDropContext>
+		</div>
 	);
 };
 

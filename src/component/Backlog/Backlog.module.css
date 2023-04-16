@@ -1,0 +1,11 @@
+.container {
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 5px;
+    margin: 24px 12px;
+    overflow: scroll;
+
+    background-color: #DDDDDD;
+}
