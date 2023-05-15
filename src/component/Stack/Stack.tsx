@@ -11,24 +11,26 @@ interface StackProps {
 
 const Stack = ({ droppableId, items }: StackProps) => {
 	return (
-		<Droppable droppableId={droppableId}>
-			{(provided) => (
-				<div
-					className={css.stack}
-					ref={provided.innerRef}
-					{...provided.droppableProps}
-				>
-					{items.map((item, index) => (
-						<Tickets
-							item={item}
-							index={index}
-							key={index}
-						/>
-					))}
-					{provided.placeholder}
-				</div>
-			)}
-		</Droppable>
+		<div className={css.stack}>
+			<Droppable droppableId={droppableId}>
+				{(provided) => (
+					<div
+						ref={provided.innerRef}
+						{...provided.droppableProps}
+					>
+						{items.map((item, index) => (
+							<Tickets
+								item={item}
+								index={index}
+								key={index}
+							/>
+						))}
+						{provided.placeholder}
+					</div>
+				)}
+			</Droppable>
+			<input />
+		</div>
 	);
 };
 
